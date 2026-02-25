@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="WeekTrack" />
+  <meta name="theme-color" content="#FAFBFE" />
+  <meta name="description" content="每周健身与 Vibe Coding 目标记录追踪" />
+  <title>WeekTrack</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- iOS 桌面图标 -->
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ====== BACKGROUND GLOW ORBS ====== -->
+<div class="bg-glow bg-glow-1"></div>
+<div class="bg-glow bg-glow-2"></div>
+<div class="bg-glow bg-glow-3"></div>
+
+<!-- ====== APP SHELL ====== -->
+<div id="app">
+
+  <!-- ── PAGE: HOME ── -->
+  <div class="page active" id="page-home">
+    <header class="app-header glass-header">
+      <div class="header-brand">
+        <i class="fa-solid fa-bolt brand-icon"></i>
+        <span class="brand-name">WEEKTRACK</span>
+      </div>
+      <div class="week-pill glass-pill">
+        <i class="fa-regular fa-calendar"></i>
+        <div class="week-text">
+          <span id="week-range">--</span>
+          <span id="week-label">第 -- 周</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="cards-container">
+
+      <!-- FITNESS CARD -->
+      <div class="goal-card glass-card" id="card-fitness">
+        <div class="card-header">
+          <div class="card-header-left">
+            <div class="card-icon fitness-icon"><i class="fa-solid fa-dumbbell"></i></div>
+            <span class="card-label">FITNESS</span>
+          </div>
+          <button class="btn-add fitness-btn" id="btn-add-fitness">
+            <i class="fa-solid fa-plus"></i><span>记录</span>
+          </button>
+        </div>
+
+        <div class="card-body">
+          <!-- Circular Ring -->
+          <div class="ring-wrap">
+            <svg class="ring-svg" viewBox="0 0 80 80">
+              <defs>
+                <linearGradient id="fitnessGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#86EFAC" />
+                  <stop offset="100%" stop-color="#34D399" />
+                </linearGradient>
+              </defs>
+              <circle class="ring-track" cx="40" cy="40" r="34" />
+              <circle class="ring-fill fitness-ring" id="fitness-ring"
+                      cx="40" cy="40" r="34"
+                      stroke="url(#fitnessGrad)"
+                      stroke-dasharray="213.63"
+                      stroke-dashoffset="213.63" />
+            </svg>
+            <div class="ring-center">
+              <span class="ring-val fitness-color" id="fitness-done">0</span>
+              <span class="ring-unit">h</span>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="card-stats">
+            <div class="stat-row">
+              <span class="stat-label">本周进度</span>
+              <span class="stat-val fitness-color" id="fitness-stat-text">0h / 5h</span>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-track">
+                <div class="progress-fill fitness-fill" id="fitness-bar" style="width:0%"></div>
+              </div>
+              <span class="progress-pct fitness-color" id="fitness-pct">0%</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-meta">周目标</span>
+              <span class="stat-meta">5h / 周</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-divider"></div>
+
+        <div class="sub-items">
+          <div class="sub-item">
+            <i class="fa-solid fa-basketball sub-icon fitness-color"></i>
+            <span class="sub-label">篮球</span>
+            <span class="sub-time" id="basketball-done">0 分钟</span>
+          </div>
+          <div class="sub-sep"></div>
+          <div class="sub-item">
+            <i class="fa-solid fa-dumbbell sub-icon fitness-color"></i>
+            <span class="sub-label">健身房</span>
+            <span class="sub-time" id="gym-done">0 分钟</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIBE CODING CARD -->
+      <div class="goal-card glass-card" id="card-vibe">
+        <div class="card-header">
+          <div class="card-header-left">
+            <div class="card-icon vibe-icon"><i class="fa-solid fa-terminal"></i></div>
+            <span class="card-label">VIBE CODING</span>
+          </div>
+          <button class="btn-add vibe-btn" id="btn-add-vibe">
+            <i class="fa-solid fa-plus"></i><span>记录</span>
+          </button>
+        </div>
+
+        <div class="card-body">
+          <div class="ring-wrap">
+            <svg class="ring-svg" viewBox="0 0 80 80">
+              <defs>
+                <linearGradient id="vibeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FED7AA" />
+                  <stop offset="100%" stop-color="#FB923C" />
+                </linearGradient>
+              </defs>
+              <circle class="ring-track" cx="40" cy="40" r="34" />
+              <circle class="ring-fill vibe-ring" id="vibe-ring"
+                      cx="40" cy="40" r="34"
+                      stroke="url(#vibeGrad)"
+                      stroke-dasharray="213.63"
+                      stroke-dashoffset="213.63" />
+            </svg>
+            <div class="ring-center">
+              <span class="ring-val vibe-color" id="vibe-done">0</span>
+              <span class="ring-unit">h</span>
+            </div>
+          </div>
+
+          <div class="card-stats">
+            <div class="stat-row">
+              <span class="stat-label">本周进度</span>
+              <span class="stat-val vibe-color" id="vibe-stat-text">0h / 10h</span>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-track">
+                <div class="progress-fill vibe-fill" id="vibe-bar" style="width:0%"></div>
+              </div>
+              <span class="progress-pct vibe-color" id="vibe-pct">0%</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-meta">周目标</span>
+              <span class="stat-meta">10h / 周</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ── PAGE: RECORDS ── -->
+  <div class="page" id="page-records">
+    <header class="app-header glass-header">
+      <div class="header-brand">
+        <i class="fa-solid fa-scroll brand-icon"></i>
+        <span class="brand-name">本周记录</span>
+      </div>
+      <div class="week-pill glass-pill">
+        <i class="fa-regular fa-calendar"></i>
+        <div class="week-text">
+          <span id="records-week-range">--</span>
+          <span id="records-week-label">第 -- 周</span>
+        </div>
+      </div>
+    </header>
+    <main class="records-container" id="records-list"></main>
+  </div>
+
+  <!-- ── BOTTOM NAVIGATION ── -->
+  <nav class="bottom-nav glass-nav">
+    <button class="nav-item active" data-page="home">
+      <i class="fa-solid fa-house"></i>
+      <span>总览</span>
+    </button>
+    <button class="nav-item" data-page="records">
+      <i class="fa-solid fa-scroll"></i>
+      <span>记录</span>
+    </button>
+  </nav>
+
+</div><!-- /#app -->
+
+
+<!-- ====== OVERLAY ====== -->
+<div class="sheet-overlay" id="overlay"></div>
+
+
+<!-- ====== SHEET: FITNESS ====== -->
+<div class="bottom-sheet glass-sheet" id="sheet-fitness">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">
+    <div class="sheet-title fitness-color">
+      <i class="fa-solid fa-dumbbell"></i>
+      <span>记录健身</span>
+    </div>
+    <button class="sheet-close" id="close-fitness"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="sheet-body">
+    <div class="field-group">
+      <label class="field-label">运动类型</label>
+      <div class="type-tabs" id="fitness-type-tabs">
+        <button class="type-tab" data-type="basketball">
+          <i class="fa-solid fa-basketball"></i>篮球
+        </button>
+        <button class="type-tab" data-type="gym">
+          <i class="fa-solid fa-dumbbell"></i>健身房
+        </button>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">时长</label>
+      <div class="time-stepper">
+        <div class="stepper-col">
+          <button class="stepper-btn" data-target="fitness-hours" data-dir="-1"><i class="fa-solid fa-minus"></i></button>
+          <div class="stepper-display">
+            <span class="stepper-num" id="fitness-hours">0</span>
+            <span class="stepper-unit">小时</span>
+          </div>
+          <button class="stepper-btn" data-target="fitness-hours" data-dir="1"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="stepper-sep">:</div>
+        <div class="stepper-col">
+          <button class="stepper-btn" data-target="fitness-minutes" data-dir="-1"><i class="fa-solid fa-minus"></i></button>
+          <div class="stepper-display">
+            <span class="stepper-num" id="fitness-minutes">00</span>
+            <span class="stepper-unit">分钟</span>
+          </div>
+          <button class="stepper-btn" data-target="fitness-minutes" data-dir="1"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">时间 <span class="field-hint">默认为现在</span></label>
+      <input type="datetime-local" id="fitness-datetime" class="field-input" />
+    </div>
+    <div class="field-group">
+      <label class="field-label">备注 <span class="field-hint">可选</span></label>
+      <input type="text" id="fitness-note" class="field-input" placeholder="例：今天状态很好" />
+    </div>
+    <button class="btn-save fitness-save" id="save-fitness">
+      <i class="fa-solid fa-check"></i>保存记录
+    </button>
+  </div>
+</div>
+
+
+<!-- ====== SHEET: VIBE CODING ====== -->
+<div class="bottom-sheet glass-sheet" id="sheet-vibe">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">
+    <div class="sheet-title vibe-color">
+      <i class="fa-solid fa-terminal"></i>
+      <span>记录 Vibe Coding</span>
+    </div>
+    <button class="sheet-close" id="close-vibe"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="sheet-body">
+    <div class="field-group">
+      <label class="field-label">时长</label>
+      <div class="time-stepper">
+        <div class="stepper-col">
+          <button class="stepper-btn" data-target="vibe-hours" data-dir="-1"><i class="fa-solid fa-minus"></i></button>
+          <div class="stepper-display">
+            <span class="stepper-num" id="vibe-hours">0</span>
+            <span class="stepper-unit">小时</span>
+          </div>
+          <button class="stepper-btn" data-target="vibe-hours" data-dir="1"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="stepper-sep">:</div>
+        <div class="stepper-col">
+          <button class="stepper-btn" data-target="vibe-minutes" data-dir="-1"><i class="fa-solid fa-minus"></i></button>
+          <div class="stepper-display">
+            <span class="stepper-num" id="vibe-minutes">00</span>
+            <span class="stepper-unit">分钟</span>
+          </div>
+          <button class="stepper-btn" data-target="vibe-minutes" data-dir="1"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">时间 <span class="field-hint">默认为现在</span></label>
+      <input type="datetime-local" id="vibe-datetime" class="field-input" />
+    </div>
+    <div class="field-group">
+      <label class="field-label">备注 <span class="field-hint">可选</span></label>
+      <input type="text" id="vibe-note" class="field-input" placeholder="例：下班后 coding 了 1.5 小时" />
+    </div>
+    <button class="btn-save vibe-save" id="save-vibe">
+      <i class="fa-solid fa-check"></i>保存记录
+    </button>
+  </div>
+</div>
+
+
+<!-- ====== TOAST ====== -->
+<div class="toast" id="toast"></div>
+
+
+<!-- ====== DELETE DIALOG ====== -->
+<div class="dialog-overlay" id="dialog-overlay">
+  <div class="dialog glass-dialog">
+    <div class="dialog-icon"><i class="fa-solid fa-trash-can"></i></div>
+    <p class="dialog-title">删除这条记录？</p>
+    <p class="dialog-desc">此操作不可撤销，本周进度将同步更新。</p>
+    <div class="dialog-actions">
+      <button class="dialog-cancel" id="dialog-cancel">取消</button>
+      <button class="dialog-confirm" id="dialog-confirm">确认删除</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="js/app.js"></script>
+
+<!-- Service Worker 注册（PWA 离线支持） -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('./sw.js')
+        .then(function(reg) { console.log('SW registered:', reg.scope); })
+        .catch(function(err) { console.log('SW failed:', err); });
+    });
+  }
+</script>
+</body>
+</html>
