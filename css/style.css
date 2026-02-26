@@ -324,7 +324,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter:opacity
 /* Time bar */
 .records-time-bar {
   display:flex; align-items:center; gap:8px; padding:0 16px;
-  height:48px; flex-shrink:0; border-top:none;
+  height:46px; flex-shrink:0; border-top:none;
 }
 .time-tab { padding:6px 14px; border-radius:var(--r-pill); font-size:12px; font-weight:500; color:var(--text-40); background:transparent; border:1px solid transparent; transition:all 0.15s; }
 .time-tab.active { background:rgba(52,211,153,0.12); border-color:rgba(52,211,153,0.30); color:var(--cyan); font-weight:600; }
@@ -335,7 +335,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter:opacity
 
 /* Summary */
 .records-summary {
-  margin:0 14px; padding:12px 16px; flex-shrink:0;
+  margin:0 16px; padding:12px 16px; flex-shrink:0;
   display:flex; flex-wrap:wrap; gap:10px; border-radius:16px;
 }
 .summary-item { display:flex; align-items:center; gap:8px; }
@@ -344,13 +344,13 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter:opacity
 .summary-empty { font-size:12px; color:var(--text-40); padding:4px; }
 
 /* Filter bar */
-.filter-bar { display:flex; gap:8px; padding:10px 14px 4px; flex-shrink:0; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.filter-bar { display:flex; gap:8px; padding:10px 16px 4px; flex-shrink:0; overflow-x:auto; -webkit-overflow-scrolling:touch; }
 .filter-bar::-webkit-scrollbar { display:none; }
 .filter-tab { flex-shrink:0; padding:6px 14px; border-radius:var(--r-pill); font-size:12px; font-weight:500; color:var(--text-40); background:rgba(255,255,255,0.70); border:1px solid rgba(200,210,240,0.50); transition:all 0.15s; }
 .filter-tab.active { background:rgba(52,211,153,0.12); border-color:rgba(52,211,153,0.30); color:var(--cyan); font-weight:600; }
 
 /* Records list */
-.records-container { flex:1; overflow-y:auto; padding:10px 14px; padding-bottom:calc(var(--nav-h) + 14px); -webkit-overflow-scrolling:touch; display:flex; flex-direction:column; gap:8px; }
+.records-container { flex:1; overflow-y:auto; padding:10px 16px; padding-bottom:calc(var(--nav-h) + 16px); -webkit-overflow-scrolling:touch; display:flex; flex-direction:column; gap:10px; }
 .record-item { display:flex; align-items:center; gap:10px; padding:12px 14px 12px 10px; border-radius:16px; background:rgba(255,255,255,0.72); border:1px solid rgba(255,255,255,0.90); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); box-shadow:0 2px 12px rgba(100,120,200,0.08); position:relative; overflow:hidden; }
 .record-left-bar { position:absolute; left:0; top:0; bottom:0; width:3px; border-radius:3px 0 0 3px; flex-shrink:0; }
 .record-icon { width:34px; height:34px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px; margin-left:4px; }
@@ -370,7 +370,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter:opacity
 /* ============================================================
    SETTINGS PAGE
    ============================================================ */
-.settings-container { flex:1; overflow-y:auto; padding:16px; padding-bottom:calc(var(--nav-h) + 16px); display:flex; flex-direction:column; gap:16px; -webkit-overflow-scrolling:touch; }
+.settings-container { flex:1; overflow-y:auto; padding:16px; padding-bottom:calc(var(--nav-h) + 16px); display:flex; flex-direction:column; gap:12px; -webkit-overflow-scrolling:touch; }
 .settings-section { display:flex; flex-direction:column; gap:10px; }
 .section-label { font-size:11px; font-weight:600; color:var(--text-40); letter-spacing:0.9px; text-transform:uppercase; padding:0 4px; }
 .habit-row { display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:16px; }
