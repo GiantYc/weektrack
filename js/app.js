@@ -284,12 +284,24 @@ function renderHome() {
   var container = document.getElementById('cards-container');
   if (!container) return;
 
+  if (habits.length === 0) {
+    container.innerHTML =
+      '<div class="empty-state" style="padding-top:60px">' +
+      '<i class="fa-solid fa-seedling"></i>' +
+      '<p>还没有习惯<br>去「习惯」页面添加你的第一个目标吧</p>' +
+      '</div>';
+    return;
+  }
+
   var html = '';
   habits.forEach(function(h) {
+    /* fallback for missing gradient fields */
+    if (!h.gradFrom) h.gradFrom = h.color;
+    if (!h.gradTo)   h.gradTo   = h.color;
     var st = stats[h.id] || { total: 0, subTypes: {}, checkinDays: [] };
-    var colorRgba = hexToRgba(h.color, 0.12);
-    var glowRgba  = hexToRgba(h.color, 0.22);
-    var glowRgba2 = hexToRgba(h.color, 0.55);
+    var colorRgba = hexToRgba(h.color || '#34D399', 0.12);
+    var glowRgba  = hexToRgba(h.color || '#34D399', 0.22);
+    var glowRgba2 = hexToRgba(h.color || '#34D399', 0.55);
 
     if (h.type === 'duration') {
       var goal = h.weekGoalMinutes || 300;
@@ -482,8 +494,8 @@ function getRecordsForView() {
   if (recordsView === 'all') {
     return loadAllRecords();
   } else if (recordsView === 'week') {
-    var target = new Date(now);
-    target.setDate(now.getDate() + recordsOffset * 7);
+    var target = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    target.setDate(target.getDate() + recordsOffset * 7);
     return loadRecords(getWeekKey(target));
   } else {
     var y = now.getFullYear();
